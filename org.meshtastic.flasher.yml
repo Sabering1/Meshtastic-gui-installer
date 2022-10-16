@@ -1,0 +1,24 @@
+app-id: org.meshtastic.flasher
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: meshtastic-flasher
+
+finish-args:
+   - --share=ipc
+   - --socket=wayland
+   - --socket=fallback-x11
+   - --share=network
+   - --filesystem=host
+   - --device=dri
+
+modules:
+  - name: meshtastic-flasher
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://github.com/meshtastic/Meshtastic-gui-installer.git
+    build-commands:
+      - pip3 install --user meshtastic-flasher  #needs to be prefix=/app
+  - "python3-requirements.json"
+#this does not work
